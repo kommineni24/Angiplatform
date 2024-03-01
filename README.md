@@ -124,6 +124,7 @@ http://localhost:<local-port>
 ![Website shall look like below:](https://github.com/kommineni24/Angiplatform/blob/master/Images/Angi%20Podinfo.png?raw=true)
 
 
+
 **Port-forwarding command for Redis:**
 ```sh
 kubectl port-forward pod/<Redis-pod-name> <local-port>:<container-port> -n <namespace>
