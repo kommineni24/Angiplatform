@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-controller
+  namespace: default
+  labels:
+    app: custom-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: custom-controller
+  template:
+    metadata:
+      labels:
+        app: custom-controller
+    spec:
+      serviceAccountName: custom-controller-sa
+      #serviceAccountName: manager-role
+      containers:
+      - name: custom-controller
+        image: kommineni24/customcontroller:latest
