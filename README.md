@@ -120,7 +120,7 @@ Browser Verification URL of application:
 http://localhost:<local-port>
 ```
 
-You should see a web page like below:
+**You should see a web page like below:**
 ![Website shall look like below:](https://github.com/kommineni24/Angiplatform/blob/master/Images/Angi%20Podinfo.png?raw=true)
 
 
@@ -148,6 +148,7 @@ Retrieve value from Redis:
 redis-cli -h 127.0.0.1 -p <local-port> get platform
 ```
 
+**You can PUT/GET from Redis CLI like below:**
 ![Redis Verification](https://github.com/kommineni24/Angiplatform/blob/master/Images/Redis%20Verify.png?raw=true)
 
 
