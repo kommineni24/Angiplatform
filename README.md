@@ -62,6 +62,34 @@ You can apply the samples (examples) from the config/sample:
 kubectl apply -k config/samples/
 ```
 
+The Custom Resource file that I have used:
+```sh
+apiVersion: my.api.group.rama.angi.platform/v1alpha1
+kind: MyAppResource
+metadata:
+  labels:
+    app.kubernetes.io/name: myappresource
+    app.kubernetes.io/instance: myappresource-sample
+    app.kubernetes.io/part-of: angiplatform
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: angiplatform
+  name: myappresource-sample
+spec:
+  # TODO(user): Add fields here
+  replicaCount: 2
+  resources:
+    memoryLimit: 64Mi
+    cpuRequest: 100m
+  image:
+    repository: ghcr.io/stefanprodan/podinfo
+    tag: latest
+  ui:
+    color: "34577c"
+    message: "Hey there"
+  redis:
+    enabled: true
+```
+ 
 >**NOTE**: Ensure that the samples has default values to test it out.
 
 
@@ -93,7 +121,7 @@ http://localhost:<local-port>
 ```
 
 You should see a web page like below:
-![Website shall look like below:](Images/Angi Podinfo.png)
+![Website shall look like below:](https://github.com/kommineni24/Angiplatform/blob/master/Images/Angi%20Podinfo.png?raw=true)
 
 
 Port-forwarding command for Redis:
@@ -120,7 +148,7 @@ Retrieve value from Redis:
 redis-cli -h 127.0.0.1 -p <local-port> get platform
 ```
 
-![Redis Verification](Images/Redis Verify.png)
+![Redis Verification](https://github.com/kommineni24/Angiplatform/blob/master/Images/Redis%20Verify.png?raw=true)
 
 
 
