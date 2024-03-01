@@ -27,6 +27,7 @@ git clone https://github.com/kommineni24/Angiplatform.git
 ### To Deploy on the cluster
 
 **Build and push your image to the location specified by `IMG`:**
+
 Naviagate to the directory you cloned above and build/tag/push the docker image as below.
 
 ```sh
@@ -64,10 +65,13 @@ kubectl apply -k config/samples/
 >**NOTE**: Ensure that the samples has default values to test it out.
 
 
-### Application verification
+### Application verification:
+
 We will rely on kube port forwarding to access the podinfo and redis application.
 
-**Port frworading for `Podinfo Application and Redis instance`:**
+
+**Port forwarding for `Podinfo Application and Redis instance`:**
+
 Navigate to the namespace where your application, custom controller, and Redis are deployed.
 
 Port-forwarding command for application:
@@ -75,20 +79,35 @@ Port-forwarding command for application:
 kubectl port-forward pod/<application-pod-name> <local-port>:<container-port> -n <namespace>
 ```
 
-Verification URL of application:
+>**NOTE**: Replace <application-pod-name> with the name of your application pod, <local-port> with the local port you want to use, <container-port> with the port where your application is running inside the container, and <namespace> with the namespace where your application pod is deployed.
+
+For example:
+```sh
+kubectl port-forward pod/myappresource-sample-0 8080:9898 -n angiplatform-system
+```
+
+
+Browser Verification URL of application:
 ```sh
 http://localhost:<local-port>
 ```
 
-![Image Description](relative/path/to/image.jpg)
-
->**NOTE**: Replace <application-pod-name> with the name of your application pod, <local-port> with the local port you want to use, <container-port> with the port where your application is running inside the container, and <namespace> with the namespace where your application pod is deployed.
+You should see a web page like below:
+![Website shall look like below:](Images/Angi Podinfo.png)
 
 
 Port-forwarding command for Redis:
 ```sh
 kubectl port-forward pod/<Redis-pod-name> <local-port>:<container-port> -n <namespace>
 ```
+
+>**NOTE**: Replace <Redis-pod-name> with the name of your Redis pod, <local-port> with the local port you want to use for port-forwarding, and <container-port> with the port where Redis is running inside the container. Also, replace <namespace> with the namespace where your Redis pod is deployed.
+
+For example:
+```sh
+kubectl port-forward pod/myappresource-sample-redis-6865dcff76-h8r7k 8081:6379 -n angiplatform-system
+```
+
 
 Verification of Redis:
 Set key-value pair in Redis:
@@ -101,12 +120,13 @@ Retrieve value from Redis:
 redis-cli -h 127.0.0.1 -p <local-port> get platform
 ```
 
-![Image Description](relative/path/to/image.jpg)
+![Redis Verification](Images/Redis Verify.png)
 
->**NOTE**: Replace <Redis-pod-name> with the name of your Redis pod, <local-port> with the local port you want to use for port-forwarding, and <container-port> with the port where Redis is running inside the container. Also, replace <namespace> with the namespace where your Redis pod is deployed.
+
 
 
 ### Tests:
+
 Naviagte to the folder where our test suite files are and run:
 ```sh
 gingko
@@ -116,7 +136,7 @@ gingko
 **Delete the instances (CRs) from the cluster:**
 
 ```sh
-kubectl delete -k config/samples/
+kubectl delete -k config/samples/ -n <namespace>
 ```
 
 **Delete the APIs(CRDs) from the cluster:**
