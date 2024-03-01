@@ -102,7 +102,7 @@ We will rely on kube port forwarding to access the podinfo and redis application
 
 Navigate to the namespace where your application, custom controller, and Redis are deployed.
 
-Port-forwarding command for application:
+***Port-forwarding command for application:***
 ```sh
 kubectl port-forward pod/<application-pod-name> <local-port>:<container-port> -n <namespace>
 ```
@@ -124,7 +124,7 @@ http://localhost:<local-port>
 ![Website shall look like below:](https://github.com/kommineni24/Angiplatform/blob/master/Images/Angi%20Podinfo.png?raw=true)
 
 
-Port-forwarding command for Redis:
+***Port-forwarding command for Redis:***
 ```sh
 kubectl port-forward pod/<Redis-pod-name> <local-port>:<container-port> -n <namespace>
 ```
